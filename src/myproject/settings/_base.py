@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 from django.core.exceptions import ImproperlyConfigured
@@ -12,6 +13,14 @@ def get_secret():
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+EXTERNAL_BASE = os.path.join(BASE_DIR, 'externals')
+
+EXTERNAL_LIBS_PATHS = os.path.join(EXTERNAL_BASE, 'libs')
+
+EXTERNAL_APPS_PATHS = os.path.join(EXTERNAL_BASE, 'apps')
+
+sys.path = ["", EXTERNAL_LIBS_PATHS, EXTERNAL_APPS_PATHS] + sys.path
 
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
